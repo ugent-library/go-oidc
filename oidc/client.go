@@ -52,7 +52,7 @@ func (c *Client) AuthorizationURL() string {
 	return c.oauthClient.AuthCodeURL("")
 }
 
-func (c *Client) Exchange(code string, profile interface{}) error {
+func (c *Client) Exchange(code string, claims interface{}) error {
 	ctx := context.Background()
 	oauthToken, err := c.oauthClient.Exchange(ctx, code)
 	if err != nil {
@@ -72,5 +72,5 @@ func (c *Client) Exchange(code string, profile interface{}) error {
 		return err
 	}
 
-	return idToken.Claims(&profile)
+	return idToken.Claims(&claims)
 }
